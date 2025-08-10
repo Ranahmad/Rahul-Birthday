@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Ranjit 🎉</title>
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(to right, #ff9a9e, #fad0c4);
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        overflow-x: hidden;
+    }
+    h1 {
+        font-size: 3em;
+        margin-top: 50px;
+        color: #fff;
+        text-shadow: 2px 2px 5px #000;
+    }
+    .wish {
+        font-size: 1.5em;
+        margin: 20px;
+        color: white;
+    }
+    .balloon {
+        position: absolute;
+        bottom: -100px;
+        width: 50px;
+        height: 70px;
+        background-color: red;
+        border-radius: 50%;
+        animation: float 6s ease-in infinite;
+    }
+    @keyframes float {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-800px); }
+    }
+    #game {
+        margin-top: 40px;
+        font-size: 1.2em;
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+    button {
+        background: #ff4081;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+</style>
+</head>
+<body>
+
+<h1>🎉 Happy Birthday, Ranjit! 🎉</h1>
+<p class="wish">Wishing you joy, laughter, and all your heart’s desires today and always! 🎂</p>
+
+<div id="game">
+    <p>🎮 Click the button as many times as you can in 5 seconds!</p>
+    <button id="startBtn">Start Game</button>
+    <p id="score">Score: 0</p>
+</div>
+
+<script>
+// 🎈 Balloons
+function createBalloon() {
+    const balloon = document.createElement("div");
+    balloon.classList.add("balloon");
+    balloon.style.left = Math.random() * window.innerWidth + "px";
+    balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+    document.body.appendChild(balloon);
+    setTimeout(() => balloon.remove(), 6000);
+}
+setInterval(createBalloon, 800);
+
+// 🎮 Simple Game
+let score = 0;
+let gameRunning = false;
+document.getElementById("startBtn").addEventListener("click", () => {
+    if (gameRunning) return;
+    score = 0;
+    document.getElementById("score").textContent = "Score: 0";
+    gameRunning = true;
+    let clicks = 0;
+    const clickHandler = () => {
+        if (gameRunning) {
+            clicks++;
+            document.getElementById("score").textContent = "Score: " + clicks;
+        }
+    };
+    document.body.addEventListener("click", clickHandler);
+    setTimeout(() => {
+        gameRunning = false;
+        document.body.removeEventListener("click", clickHandler);
+        alert("🎉 Time's up! Your score: " + clicks);
+    }, 5000);
+});
+</script>
+
+</body>
+</html>
